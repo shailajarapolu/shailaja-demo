@@ -31,8 +31,8 @@ jobs:
         uses: docker/login-action@v2.1.0
         with:
           registry: registry-1.docker.io
-          username: ${{secrets.TESTENV}}
-          password: ${{secrets.TESTENV}}
+          username: ${{secrets.DOCKERHUBUSERNAME}}
+          password: ${{secrets.DOCKERHUBPASSWORD}}
 
     
     
