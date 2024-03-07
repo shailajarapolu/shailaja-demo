@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: HelloWorld
 
 # Controls when the workflow will run
 on:
@@ -16,18 +16,23 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  Logintodockerhub:
     # The type of runner that the job will run on
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+    environment: Dev
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-     - name: docker login
+      # Runs a single command using the runners shell
+      - name: docker login
         uses: docker/login-action@v2.1.0
         with:
           registry: registry-1.docker.io
           username: ${{secrets.DOCKERHUBUSERNAME}}
           password: ${{secrets.DOCKERHUBPASSWORD}}
+
+    
+    
