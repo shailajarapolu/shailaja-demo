@@ -1,3 +1,5 @@
+*********** environment variable *****
+ 
 # This is a basic workflow to help you get started with Actions
  
 name: CI
@@ -5,46 +7,28 @@ name: CI
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-   push:
+  push:
     branches: [ "main" ]
-   pull_request:
+  pull_request:
     branches: [ "main" ]
  
   # Allows you to run this workflow manually from the Actions tab
- 
- 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  workflow_dispatch:
 jobs:
-  # This workflow contains a single job called "build"
-  test: 
+  example_matrix:
+    strategy:
+      matrix:
+        version: [10]
+        names: ['test1' ,'test2']
     runs-on: ubuntu-latest
+    env:
+      Day: monday
+      name: shubham
+      company: acccenture
     steps:
-      - name: test
-        run: echo test
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-  runwhenbuildcomplete: 
-    runs-on: ubuntu-latest
-    needs: [test]  
-    steps:
-      - name: run for run 
-        run: echo "fun"
-  runwhenbuildcompleteafter: 
-    runs-on: ubuntu-latest
-    needs: [runwhenbuildcomplete,build]  
-    steps:
-      - name: run for run 
-        run: echo "fun"
+      - name: varibles
+        run: echo "my name is $name. Day is $Day and Company is $company refrenece of $GITHUB_REF and $github.event	"
+      - name: matrixa
+        run: echo ${{matrix.version}} 
+      - name: test  
+        run: echo ${{matrix.names}} 
