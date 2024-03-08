@@ -49,3 +49,9 @@ jobs:
     steps:
       - name: run for run 
         run: echo "fun"
+ runwhenbuildcompleteafter: 
+    runs-on: ubuntu-latest
+    needs: [runwhenbuildcompleteone,build]  
+    steps:
+      - name: run for run 
+        run: echo "fun"
